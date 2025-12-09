@@ -140,15 +140,82 @@ h2 { font-size: 2.5rem; font-weight: 600; line-height: 1.1; margin-bottom: 10px;
 
 /* --- COOKIE --- */
 .cookie-banner {
-  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px);
-  background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); padding: 20px; border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.15); z-index: 99999; width: 90%; max-width: 400px; text-align: center; border: 1px solid rgba(0,0,0,0.08); transition: transform 0.3s ease;
-}
-.cookie-banner.show { transform: translateX(-50%) translateY(0); }
-.cookie-buttons { display: flex; gap: 10px; justify-content: center; margin-top: 10px;}
-.btn-cookie-pri { background: var(--text-main); color: white; border: none; padding: 10px 22px; border-radius: 99px; cursor: pointer; font-size: 0.85rem; font-weight: 500;}
-.btn-cookie-sec { background: #e5e5e5; color: black; border: none; padding: 10px 22px; border-radius: 99px; cursor: pointer; font-size: 0.85rem;}
+  position: fixed;
+  bottom: 20px; /* Abstand vom unteren Rand, wenn sichtbar */
+  left: 50%;
+  
+  /* WICHTIG: Hier war der Fehler. Wir schieben ihn jetzt um 120% seiner eigenen Höhe nach unten */
+  transform: translateX(-50%) translateY(120%);
+  
+  /* Zusätzlich unsichtbar machen, damit nichts "durchblitzt" */
+  opacity: 0;
+  visibility: hidden; 
 
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px); /* Für Safari */
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  z-index: 99999;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.08);
+  
+  /* Wir animieren Transformation, Deckkraft und Sichtbarkeit */
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.cookie-banner.show {
+  /* Zurück in die Ursprungsposition (bottom: 20px) */
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.cookie-content p {
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+
+.cookie-content a {
+  color: var(--text-main);
+  text-decoration: underline;
+}
+
+.cookie-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn-cookie-pri {
+  background: var(--text-main);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 99px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+.btn-cookie-pri:hover { opacity: 0.8; }
+
+.btn-cookie-sec {
+  background: #e5e5e5;
+  color: black;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 99px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+.btn-cookie-sec:hover { background: #d0d0d0; }
 /* --- MOBILE --- */
 .mobile-toggle { display: none; background: none; border: none; cursor: pointer; }
 .mobile-toggle span { display: block; width: 22px; height: 2px; background: #000; margin: 5px 0; transition: 0.3s;}
