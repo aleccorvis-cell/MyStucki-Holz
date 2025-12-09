@@ -1,27 +1,47 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Mobile Menü Elemente auswählen
-    const menuBtn = document.querySelector('.mobile-menu-btn');
-    const mobileNav = document.querySelector('.mobile-nav-overlay');
-
-    // Klick-Event hinzufügen
-    if(menuBtn && mobileNav) {
-        menuBtn.addEventListener('click', () => {
-            // Die Klasse 'active' hinzufügen oder entfernen
-            mobileNav.classList.toggle('active');
-            
-            // Optional: Button Animation (zum X werden)
-            // Hier könnte man später CSS Animationen triggern
+    // 1. SCROLL REVEAL (Apple Effekt)
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
         });
+    }, { threshold: 0.1 }); // Startet, wenn 10% sichtbar sind
 
-        // Menü schließen, wenn man auf einen Link klickt
-        const links = mobileNav.querySelectorAll('a');
-        links.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNav.classList.remove('active');
-            });
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // 2. MOBILE MENU
+    const menuBtn = document.querySelector('.mobile-toggle');
+    const mobileNav = document.querySelector('.mobile-nav-overlay');
+    
+    if(menuBtn) {
+        menuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
         });
     }
 
-    console.log('Design: Apple-Style loaded.');
+    // 3. COOKIE BANNER
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('cookie-accept');
+    const rejectBtn = document.getElementById('cookie-reject');
+
+    if (!localStorage.getItem('cookieConsent')) {
+        setTimeout(() => cookieBanner.classList.add('show'), 1500);
+    }
+
+    if(acceptBtn) {
+        acceptBtn.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'accepted');
+            cookieBanner.classList.remove('show');
+        });
+    }
+
+    if(rejectBtn) {
+        rejectBtn.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'rejected');
+            cookieBanner.classList.remove('show');
+        });
+    }
 });
