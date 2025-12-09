@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (acceptBtn && cookieBanner) {
     acceptBtn.addEventListener('click', () => {
       localStorage.setItem('cookieConsent', 'accepted');
-      cookieBanner.classList.remove('show');
+cookieBanner.style.display = 'none';
     });
   }
 
@@ -52,7 +52,5 @@ document.addEventListener('DOMContentLoaded', () => {
   if (rejectBtn && cookieBanner) {
     rejectBtn.addEventListener('click', () => {
       localStorage.setItem('cookieConsent', 'rejected');
-      cookieBanner.classList.remove('show');
-    });
-  }
-});
+     cookieBanner.style.display = 'none';
+    }); 
