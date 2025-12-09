@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
         entry.target.classList.add('active');
       }
     });
-  }, { threshold: 0, rootMargin: '50px' }); // Startet sofort auch für bereits sichtbare Elemente
-  
+  }, { threshold: 0, rootMargin: '50px' });
+
   revealElements.forEach(el => revealObserver.observe(el));
 
   // Aktiviere Elemente, die bereits beim Laden sichtbar sind
@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // 2. MOBILE MENU
   const menuBtn = document.querySelector('.mobile-toggle');
   const mobileNav = document.querySelector('.mobile-nav-overlay');
-  
-  if(menuBtn) {
+
+  if (menuBtn && mobileNav) {
     menuBtn.addEventListener('click', () => {
       mobileNav.classList.toggle('active');
     });
@@ -35,18 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const acceptBtn = document.getElementById('cookie-accept');
   const rejectBtn = document.getElementById('cookie-reject');
 
-  if (!localStorage.getItem('cookieConsent')) {
+  // Wenn noch keine Entscheidung gespeichert ist: Banner nach 1,5 s zeigen
+  if (cookieBanner && !localStorage.getItem('cookieConsent')) {
     setTimeout(() => cookieBanner.classList.add('show'), 1500);
   }
 
-  if(acceptBtn) {
+  // Akzeptieren
+  if (acceptBtn && cookieBanner) {
     acceptBtn.addEventListener('click', () => {
       localStorage.setItem('cookieConsent', 'accepted');
       cookieBanner.classList.remove('show');
     });
   }
 
-  if(rejectBtn) {
+  // Ablehnen
+  if (rejectBtn && cookieBanner) {
     rejectBtn.addEventListener('click', () => {
       localStorage.setItem('cookieConsent', 'rejected');
       cookieBanner.classList.remove('show');
