@@ -1,13 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Stuckateur Website geladen.');
-
-    // Hier kommt später der Code für das mobile Menü rein
-    const menuBtn = document.querySelector('.mobile-menu-btn');
     
-    if(menuBtn) {
+    // Mobile Menü Elemente auswählen
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileNav = document.querySelector('.mobile-nav-overlay');
+
+    // Klick-Event hinzufügen
+    if(menuBtn && mobileNav) {
         menuBtn.addEventListener('click', () => {
-            alert('Menü wird geöffnet (Funktion wird noch implementiert)');
-            // Hier würde man später eine Klasse 'active' auf die Navigation toggeln
+            // Die Klasse 'active' hinzufügen oder entfernen
+            mobileNav.classList.toggle('active');
+            
+            // Optional: Button Animation (zum X werden)
+            // Hier könnte man später CSS Animationen triggern
+        });
+
+        // Menü schließen, wenn man auf einen Link klickt
+        const links = mobileNav.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+            });
         });
     }
+
+    console.log('Design: Apple-Style loaded.');
 });
