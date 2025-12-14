@@ -3,7 +3,7 @@
   --bg-body: #ffffff;
   --bg-grey: #f0f0f2;
   --text-main: #1d1d1f;
-  --text-light: #6e6e73;
+  --text-light: #fe8a36;
   --accent-blue: #0071e3;
   --font-stack: 'Inter', -apple-system, sans-serif;
   --radius: 20px;
@@ -171,7 +171,7 @@ main {
 }
 
 .btn-primary {
-  background: var(--accent-blue);
+  background: #fe8a36;
   color: white;
   padding: 12px 24px;
   border-radius: 99px;
@@ -188,7 +188,7 @@ main {
 
 .btn-secondary {
   background: transparent;
-  color: var(--accent-blue);
+  color: #fe8a36;
   border: 1px solid var(--accent-blue);
   padding: 12px 24px;
   border-radius: 99px;
@@ -205,7 +205,7 @@ main {
 }
 
 .link-arrow {
-  color: var(--accent-blue);
+  color: #fe8a36;
   text-decoration: none;
   font-size: 1rem;
 }
